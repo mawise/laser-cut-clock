@@ -1,0 +1,21 @@
+<% 
+require './wheels.rb'
+require './frame.rb'
+  xoff = 10
+  yoff = 10
+%>
+
+<svg  xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      height="<%=270+2*yoff%>mm" width="<%=170+2*xoff%>mm">
+
+<%= front(xoff,yoff) %>
+<%= back(xoff, yoff) %>
+
+<%= draw_motor_wheel(xoff+85, 190.5+yoff) %>
+<%= draw_escapement(xoff+85,58.75+yoff) %>
+<%= draw_middle_wheel(xoff+85, 110+yoff) %>
+
+<%= draw_minute_wheel(xoff+85, yoff+135) %>
+<%= draw_reduction_wheel(xoff+85, yoff+175) %>
+</svg>

@@ -14,20 +14,6 @@ class Gear
     @style = style
   end
 
-  # center x, centery, theta, radius
-  def rad_to_xy(cx,cy,t,r)
-    x = r*Math.sin(t)
-    y = -1*r*Math.cos(t)
-    [cx+x,cy+y]
-  end
-  
-  # input tooth number and total number of teeth
-  # output position of tooth in radians
-  # accepts fractional tooth number
-  def theta(n,teeth)
-    n.to_f/teeth * (2*Math::PI)
-  end
-
   def draw
     ret = ""
     (0...@teeth).each do |n|

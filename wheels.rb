@@ -1,3 +1,5 @@
+require './gear.rb'
+
 def draw_motor_wheel(cx, cy)
   id = 69.5
   od = 73.5
@@ -29,4 +31,27 @@ def draw_escapement(cx, cy)
 
   Gear.new(cx, cy, id, od, teeth, Tooth::SAWTOOTH, Gear::STYLE).draw +
   Gear.new(cx, cy, small_id, small_od, small_teeth, Tooth::TRIANGLE, Gear::STYLE).draw
+end
+
+def draw_minute_wheel(cx, cy)
+  irad = 9
+  orad = 15.9
+  teeth = 10
+  hole_rad = 4
+
+  Gear.new(cx, cy, irad, orad, teeth, Tooth::TRIANGLE, Gear::STYLE).draw +
+  circle(cx, cy, hole_rad, "mm", Style::CIRCLE)
+end
+
+def draw_reduction_wheel(cx, cy)
+  irad = 24
+  orad = 29.6
+  teeth = 20
+  
+  small_irad = 4.23
+  small_orad = 6.9
+  small_teeth = 8
+
+  Gear.new(cx, cy, irad, orad, teeth, Tooth::TRIANGLE, Gear::STYLE).draw +
+  Gear.new(cx, cy, small_irad, small_orad, small_teeth, Tooth::TRIANGLE, Gear::STYLE).draw
 end
