@@ -2,7 +2,7 @@ def draw_motor_wheel(cx, cy)
   id = 69.5
   od = 73.5
   teeth = 72
-  Gear.new(cx, cy, id, od, teeth, Gear::SQUARE, Gear::STYLE).draw_square
+  Gear.new(cx, cy, id, od, teeth, Tooth::SQUARE, Gear::STYLE).draw_square
 end
 
 def draw_middle_wheel(cx, cy)
@@ -14,8 +14,8 @@ def draw_middle_wheel(cx, cy)
   small_od = 8.47
   small_teeth = 8
 
-  Gear.new(cx, cy, id, od, teeth, Gear::ROUND_SQUARE, Gear::STYLE).draw_square +
-  Gear.new(cx, cy, small_id, small_od, small_teeth, Gear::TRIANGLE, Gear::STYLE).draw
+  Gear.new(cx, cy, id, od, teeth, Tooth::ROUND_SQUARE, Gear::STYLE).draw_square +
+  Gear.new(cx, cy, small_id, small_od, small_teeth, Tooth::TRIANGLE, Gear::STYLE).draw
 end
 
 def draw_escapement(cx, cy)
@@ -27,6 +27,6 @@ def draw_escapement(cx, cy)
   small_od = 8.47
   small_teeth = 8
 
-  Gear.new(cx, cy, id, od, teeth, Gear::SAWTOOTH, Gear::STYLE).draw +
-  Gear.new(cx, cy, small_id, small_od, small_teeth, Gear::TRIANGLE, Gear::STYLE).draw
+  Gear.new(cx, cy, id, od, teeth, Tooth::SAWTOOTH, Gear::STYLE).draw +
+  Gear.new(cx, cy, small_id, small_od, small_teeth, Tooth::TRIANGLE, Gear::STYLE).draw
 end
