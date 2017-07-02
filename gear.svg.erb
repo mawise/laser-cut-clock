@@ -1,0 +1,13 @@
+<% 
+require './gear.rb'
+require './wheels.rb'
+%>
+
+<svg  xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      height="100mm" width="100mm">
+
+<%= draw_escapement(30,30) %>
+<%= draw_motor_wheel(60, 30) %>
+<%= draw_middle_wheel(50, 50) %>
+</svg>
