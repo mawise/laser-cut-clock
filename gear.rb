@@ -1,3 +1,5 @@
+require './shapes.rb'
+
 class Gear
   STYLE = "style=\"stroke:black;stroke-width:0.1mm\""
 
@@ -19,11 +21,6 @@ class Gear
     [cx+x,cy+y]
   end
   
-  # draw an svg line
-  def line(x1,y1,x2,y2,unit,style)
-   "<line x1=\"#{x1}#{unit}\" y1=\"#{y1}#{unit}\" x2=\"#{x2}#{unit}\" y2=\"#{y2}#{unit}\" #{style} />\n"
-  end 
-  
   # input tooth number and total number of teeth
   # output position of tooth in radians
   # accepts fractional tooth number
@@ -42,14 +39,13 @@ class Gear
         end
       end
     end
-    ret
+    ret + "\n"
   end
 
   # rotate clockwise about the origin
   def rotate(x,y,theta)
     [x*-1*Math.cos(theta) + y*Math.sin(theta), x*-1*Math.sin(theta) + y*-1*Math.cos(theta)]
   end
-
 
   def draw_square
     ret = ""
@@ -65,7 +61,7 @@ class Gear
         end
       end
     end
-    ret
+    ret +"\n"
   end
 
   ### Tooth Shapes
