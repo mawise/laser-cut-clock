@@ -55,3 +55,17 @@ def draw_reduction_wheel(cx, cy)
   Gear.new(cx, cy, irad, orad, teeth, Tooth::TRIANGLE, Gear::STYLE).draw +
   Gear.new(cx, cy, small_irad, small_orad, small_teeth, Tooth::TRIANGLE, Gear::STYLE).draw
 end
+
+def draw_hour_wheel(cx, cy)
+  irad = 32.8
+  orad = 37
+  teeth = 48
+  hole_rad = 4.75
+  gap_irad = 9.5
+  gap_orad = 22.75
+
+  Gear.new(cx, cy, irad, orad, teeth, Tooth::TRIANGLE, Gear::STYLE).draw +
+  circle(cx, cy, hole_rad, "mm", Style::CIRCLE) +
+  gear_holes(cx, cy, gap_irad, gap_orad, "mm", Style::LINE)
+end
+

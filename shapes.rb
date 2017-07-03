@@ -69,10 +69,11 @@ end
 
 def arc(cx, cy, r, start_angle, end_angle, unit, style)
   ret = ""
-  range = 100
-  (0...range).each do |n|
-    t = theta(n, range) 
-    t2 = theta(n+1, range)
+  range = end_angle - start_angle
+  incr = range.to_f/100
+  (start_angle...end_angle).step(incr) do |n|
+    t = n 
+    t2 = n+incr
     start = rad_to_xy(cx, cy, t, r)
     stop = rad_to_xy(cx, cy, t2, r)
     ret += line(start[0], start[1], stop[0], stop[1], unit, style)
@@ -81,5 +82,18 @@ def arc(cx, cy, r, start_angle, end_angle, unit, style)
 end
 
 def gear_holes(cx, cy, r1, r2, unit, style)
-  
+  ret = ""
+  [[0,2],[3,5],[6,8]].each do |start, stop| 
+    theta1 = theta(start-Math::PI/18, 9)
+    theta2 = theta(stop-Math::PI/18, 9)
+    in1 = rad_to_xy(cx, cy, theta1, r1)
+    out1 = rad_to_xy(cx, cy, theta1, r2)
+    in2 = rad_to_xy(cx, cy, theta2, r1)
+    out2 = rad_to_xy(cx, cy, theta2, r2)
+    ret += line(in1[0], in1[1], out1[0], out1[1], unit, style)
+    ret += line(in2[0], in2[1], out2[0], out2[1], unit, style)
+    ret += arc(cx, cy, r1, theta1, theta2, unit, style)
+    ret += arc(cx, cy, r2, theta1, theta2, unit, style)
+  end
+  ret
 end
