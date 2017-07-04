@@ -21,11 +21,15 @@ class Gear
       points.each_with_index do |pair, i|
         if (i+1 < points.size)
           dest = points[i+1]
-          ret += line(pair[0], pair[1], dest[0], dest[1], @unit, @style)
+          ret += line(pair, dest, @unit, @style)
         end
       end
     end
     ret + "\n"
+  end
+
+  def from_center(point)
+    [@cx + point[0], @cy + point[1]]
   end
 
   # rotate clockwise about the origin
@@ -43,7 +47,7 @@ class Gear
       points.each_with_index do |pair, i|
         if (i+1 < points.size)
           dest = points[i+1]
-          ret += line(@cx+pair[0], @cy+pair[1], @cx+dest[0], @cy+dest[1], @unit, @style)
+          ret += line(from_center(pair), from_center(dest), @unit, @style)
         end
       end
     end

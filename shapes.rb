@@ -38,27 +38,25 @@ class Style
   CIRCLE = LINE[0...LINE.size-1] + ";fill:none\""
 end
 
-def line(x1,y1,x2,y2,unit,style)
- "<line x1=\"#{x1}#{unit}\" y1=\"#{y1}#{unit}\" x2=\"#{x2}#{unit}\" y2=\"#{y2}#{unit}\" #{style} />\n"
-end
-
-def line_points(start, stop, unit, style)
-  line(start[0], start[1], stop[0], stop[1], unit, style)
+def line(start,stop,unit,style)
+ "<line x1=\"#{start[0]}#{unit}\" y1=\"#{start[1]}#{unit}\" x2=\"#{stop[0]}#{unit}\" y2=\"#{stop[1]}#{unit}\" #{style} />\n"
 end
 
 def polygon(points, unit, style)
   ret = ""
   (0...points.size).each do |n|
-    ret += line_points(points[n], points[(n+1)%points.size], unit, style)
+    ret += line(points[n], points[(n+1)%points.size], unit, style)
   end
   ret
 end
 
 def box(x1,y1,x2,y2,unit,style)
-  line(x1,y1,x1,y2,unit,style) +
-  line(x1,y2,x2,y2,unit,style) +
-  line(x2,y2,x2,y1,unit,style) +
-  line(x2,y1,x1,y1,unit,style)
+  points = [
+    [x1, y1],
+    [x2, y1],
+    [x2, y2],
+    [x1, y2]]
+  polygon(points, unit, style)
 end
 
 def circle(cx, cy, r, unit, style)
@@ -88,7 +86,7 @@ def arc(cx, cy, r, start_angle, end_angle, unit, style)
     t2 = n+incr
     start = rad_to_xy(cx, cy, t, r)
     stop = rad_to_xy(cx, cy, t2, r)
-    ret += line(start[0], start[1], stop[0], stop[1], unit, style)
+    ret += line(start, stop, unit, style)
   end
   ret
 end
@@ -102,8 +100,8 @@ def gear_holes(cx, cy, r1, r2, unit, style)
     out1 = rad_to_xy(cx, cy, theta1, r2)
     in2 = rad_to_xy(cx, cy, theta2, r1)
     out2 = rad_to_xy(cx, cy, theta2, r2)
-    ret += line(in1[0], in1[1], out1[0], out1[1], unit, style)
-    ret += line(in2[0], in2[1], out2[0], out2[1], unit, style)
+    ret += line(in1, out1, unit, style)
+    ret += line(in2, out2, unit, style)
     ret += arc(cx, cy, r1, theta1, theta2, unit, style)
     ret += arc(cx, cy, r2, theta1, theta2, unit, style)
   end
