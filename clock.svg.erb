@@ -1,6 +1,7 @@
 <% 
 require './wheels.rb'
 require './frame.rb'
+require './anchor.rb'
   xoff = 10
   yoff = 10
 %>
@@ -19,4 +20,6 @@ require './frame.rb'
 <%= draw_minute_wheel(xoff+85, yoff+135) %>
 <%= draw_hour_wheel(xoff+85, yoff+135) %>
 <%= draw_reduction_wheel(xoff+85, yoff+175) %>
+
+<%= draw_anchor(xoff+85, yoff+16.9) %>
 </svg>

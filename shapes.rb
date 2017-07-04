@@ -42,6 +42,18 @@ def line(x1,y1,x2,y2,unit,style)
  "<line x1=\"#{x1}#{unit}\" y1=\"#{y1}#{unit}\" x2=\"#{x2}#{unit}\" y2=\"#{y2}#{unit}\" #{style} />\n"
 end
 
+def line_points(start, stop, unit, style)
+  line(start[0], start[1], stop[0], stop[1], unit, style)
+end
+
+def polygon(points, unit, style)
+  ret = ""
+  (0...points.size).each do |n|
+    ret += line_points(points[n], points[(n+1)%points.size], unit, style)
+  end
+  ret
+end
+
 def box(x1,y1,x2,y2,unit,style)
   line(x1,y1,x1,y2,unit,style) +
   line(x1,y2,x2,y2,unit,style) +
